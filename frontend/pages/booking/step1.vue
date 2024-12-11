@@ -36,47 +36,48 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
+<script setup>
+import { ref } from "vue";
 
-export default {
-  inject: ["updateBookingData", "changeStep"],
-  data() {
-    return {
-      services: [
-        "Telefonisk konsultation",
-        "Fysisk konsultation",
-        "Massage",
-        "IMS Akupunktur",
-        "Led mobilisering",
-        "Personlig træning",
-        "Kropsterapi",
-      ],
-      selectedService: null,
-    };
-  },
-  methods: {
-    goToHomepage() {
-      this.$router.push("/"); // Redirect to homepage
-    },
-    goToStep2() {
-      const payload = { service: this.selectedService };
-      axios
-        .post("/api/bookings", payload)
-        .then((response) => {
-          console.log("Booking created:", response.data);
-          this.updateBookingData("id", response.data._id); // Save booking ID
-          this.updateBookingData("service", this.selectedService); // Save selected service locally
-          this.changeStep(2); // Move to Step 2
-        })
-        .catch((error) => {
-          console.error(
-            "Error saving booking:",
-            error.response?.data || error.message
-          );
-        });
-    },
-  },
+const router = useRouter();
+const { bookingData, updateBookingData, changeStep } = useBooking();
+
+const services = [
+  "Telefonisk konsultation",
+  "Fysisk konsultation",
+  "Massage",
+  "IMS Akupunktur",
+  "Led mobilisering",
+  "Personlig træning",
+  "Kropsterapi",
+];
+
+const selectedService = ref(null);
+
+const goToHomepage = () => {
+  router.push("/");
+};
+
+const goToStep2 = async () => {
+  try {
+    const payload = { service: selectedService.value };
+    const response = await useFetch("http://localhost:5000/api/bookings", {
+      method: "POST",
+      body: payload,
+    });
+
+    if (response.error.value) {
+      throw new Error(response.error.value.message);
+    }
+
+    const data = response.data.value;
+    updateBookingData("id", data._id);
+    updateBookingData("service", selectedService.value);
+    changeStep(2);
+    router.push("/booking/step2");
+  } catch (error) {
+    console.error("Error saving booking:", error.message);
+  }
 };
 </script>
 

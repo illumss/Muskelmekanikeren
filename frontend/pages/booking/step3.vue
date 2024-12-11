@@ -10,7 +10,7 @@
 
       <div class="form-group">
         <label for="address">Mail:</label>
-        <input type="email" v-model="address" id="address" required />
+        <input type="email" v-model="email" id="address" required />
       </div>
 
       <div class="form-group">
@@ -35,35 +35,34 @@
   </div>
 </template>
 
-<script>
-export default {
-  inject: ["updateBookingData", "changeStep", "bookingData"],
-  data() {
-    return {
-      name: this.bookingData.userInfo?.name || "",
-      address: this.bookingData.userInfo?.address || "",
-      phone: this.bookingData.userInfo?.phone || "",
-      isMember: this.bookingData.userInfo?.isMember || false,
-    };
-  },
-  methods: {
-    goToStep2() {
-      this.changeStep(2); // Navigate back to Step 2
-    },
-    submitInfo() {
-      const userInfo = {
-        name: this.name,
-        address: this.address,
-        phone: this.phone,
-        isMember: this.isMember,
-      };
-      this.updateBookingData("userInfo", userInfo); // Save user info
-      this.changeStep(4); // Navigate to confirmation step
-    },
-  },
+<script setup>
+import { ref } from "vue";
+const router = useRouter();
+const { bookingData, updateBookingData, changeStep } = useBooking();
+
+// Initialize form data from booking data
+const name = ref(bookingData.value?.userInfo?.name || "");
+const email = ref(bookingData.value?.userInfo?.email || "");
+const phone = ref(bookingData.value?.userInfo?.phone || "");
+const isMember = ref(bookingData.value?.userInfo?.isMember || false);
+
+const goToStep2 = () => {
+  changeStep(2);
+  router.push("/booking/step2");
+};
+
+const submitInfo = async () => {
+  const userInfo = {
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    isMember: isMember.value,
+  };
+  updateBookingData("userInfo", userInfo);
+  changeStep(4);
+  router.push("/booking/confirmation");
 };
 </script>
-
 <style scoped>
 .form-container {
   max-width: 600px;

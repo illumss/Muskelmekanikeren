@@ -21,6 +21,35 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const body = req.body;
+    const id = req.params.id;
+    console.log("Request body:", body);
+    console.log("Request params:", id);
+    if (!id) {
+      return res
+        .status(400)
+        .json({ error: "Booking ID is required for Step 2" });
+    }
+
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+    booking.service = body.service;
+    booking.date = body.date;
+    booking.time = body.time;
+    booking.userInfo = body.userInfo;
+    booking.id = body.id;
+    const savedBooking = await booking.save();
+    res.status(200).json(savedBooking);
+  } catch (error) {
+    console.error("Error updating booking:", error);
+    res.status(500).json({ error: "Failed to update booking" });
+  }
+});
+
 // GET /api/bookings - Retrieve all bookings
 router.get("/", async (req, res) => {
   try {

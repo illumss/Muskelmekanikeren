@@ -55,36 +55,72 @@
   </div>
 </template>
 
-<script>
-export default {
-  inject: ["updateBookingData", "changeStep", "bookingData"],
-  data() {
-    return {
-      currentMonth: new Date().getMonth(),
-      currentYear: new Date().getFullYear(),
-      selectedDate: this.bookingData.date || null,
-      selectedTime: this.bookingData.time || null,
-      availableTimes: [],
-    };
-  },
-  methods: {
-    selectDate(day) {
-      this.selectedDate = `${this.currentYear}-${this.currentMonth + 1}-${day}`;
-      this.fetchAvailableTimes();
-    },
-    fetchAvailableTimes() {
-      this.availableTimes = ["08:00", "10:00", "12:00", "14:00"];
-    },
-    goBack() {
-      this.changeStep(1); // Navigate to Step 1
-    },
-    goToStep3() {
-      this.updateBookingData("date", this.selectedDate);
-      this.updateBookingData("time", this.selectedTime);
-      this.changeStep(3); // Navigate to Step 3
-    },
-  },
+<script setup>
+import { ref, onMounted, computed } from "vue";
+
+const { bookingData, updateBookingData, changeStep } = useBooking();
+const router = useRouter();
+
+const currentMonth = ref(new Date().getMonth());
+const currentYear = ref(new Date().getFullYear());
+const selectedDate = ref(bookingData.value?.date || null);
+const selectedTime = ref(bookingData.value?.time || null);
+const availableTimes = ref([]);
+
+const currentMonthName = computed(() => {
+  return new Date(currentYear.value, currentMonth.value).toLocaleString(
+    "default",
+    { month: "long" }
+  );
+});
+
+const daysInMonth = computed(() => {
+  return new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
+});
+
+const selectDate = (day) => {
+  selectedDate.value = `${currentYear.value}-${currentMonth.value + 1}-${day}`;
+  fetchAvailableTimes();
 };
+
+const fetchAvailableTimes = () => {
+  availableTimes.value = ["08:00", "10:00", "12:00", "14:00"];
+};
+
+const isDateEnabled = (day) => {
+  const date = new Date(currentYear.value, currentMonth.value, day);
+  const today = new Date();
+  return date >= today;
+};
+
+const changeMonth = (delta) => {
+  const newMonth = currentMonth.value + delta;
+  if (newMonth < 0) {
+    currentMonth.value = 11;
+    currentYear.value--;
+  } else if (newMonth > 11) {
+    currentMonth.value = 0;
+    currentYear.value++;
+  } else {
+    currentMonth.value = newMonth;
+  }
+};
+
+const goBack = () => {
+  changeStep(1);
+};
+
+const goToStep3 = () => {
+  updateBookingData("date", selectedDate.value);
+  updateBookingData("time", selectedTime.value);
+  changeStep(3);
+  router.push("/booking/step3");
+};
+
+// Initialize component
+onMounted(() => {
+  console.log("Step2 mounted, current booking data:", bookingData.value);
+});
 </script>
 
 <style scoped>
