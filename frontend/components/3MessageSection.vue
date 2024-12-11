@@ -20,18 +20,23 @@
 <style scoped>
 .message-section {
   background-color: #e0eaef;
-  padding: 5rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
 }
 
 .message-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8rem;
 }
 
 img {
   width: 100%;
   max-width: 600px;
   margin-top: 1rem;
+  max-height: 900px;
 }
 </style>

@@ -8,7 +8,7 @@
         <p class="price">{{ item.price }}</p>
         <p class="note" v-if="item.note">{{ item.note }}</p>
         <div class="readmore" @click="toggleExpand(index)">
-          {{ expandedIndex === index ? "Læs mindre" : "Læs mere" }}
+          {{ expandedIndex === index ? "Læs mindre ↑" : "Læs mere ↓" }}
         </div>
 
         <transition name="fade">
@@ -84,9 +84,15 @@ const prices = [
 
 <style scoped>
 .prices-section {
-  padding: 5rem;
-  background: white;
-  font-family: "Arial", sans-serif;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  background-color: #f5f3f3;
+}
+
+h1 {
+  margin-bottom: 2rem;
 }
 
 .price-container {
@@ -104,7 +110,7 @@ const prices = [
 }
 
 .price-container::-webkit-scrollbar-thumb {
-  background: #233d4d;
+  background: #707070;
   border-radius: 10px;
 }
 
@@ -120,7 +126,7 @@ const prices = [
   text-align: left;
   position: relative;
   transition: transform 0.3s ease;
-  background: white;
+  background-color: #f5f3f3;
 }
 
 .price-box:hover {
@@ -164,7 +170,7 @@ h3 {
   cursor: pointer;
   text-align: right;
   margin-top: 1.5rem;
-  text-decoration: underline;
+  font-family: "PPNeueMontreal", sans-serif;
 }
 
 .fade-enter-active,

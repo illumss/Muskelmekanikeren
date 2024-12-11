@@ -2,9 +2,13 @@
   <header class="page-header">
     <img src="/images/header-image.jpg" alt="Clinic Image" class="header-img" />
     <div class="color-overlay"></div>
-    <img src="/images/logo_hvid.svg" alt="Clinic Logo" class="header-logo" />
+    <a href="/">
+      <img src="/images/logo_hvid.svg" alt="Clinic Logo" class="header-logo" />
+    </a>
     <div class="header-name">
-      <slot name="clinic-name">Dennis Okholm</slot>
+      <a href="/">
+        <slot name="clinic-name">Dennis Okholm</slot>
+      </a>
     </div>
     <img
       src="/images/muskelmekanikeren.png"
@@ -58,5 +62,10 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   max-width: 80%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 </style>

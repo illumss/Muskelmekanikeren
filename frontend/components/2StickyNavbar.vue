@@ -1,9 +1,9 @@
 <template>
   <nav class="sticky-navbar">
-    <a href="#prices">Priser og ydelser</a>
-    <a href="#about">Om Muskelmekanikeren</a>
-    <a href="#contact">Kontakt</a>
-    <button class="book-button" @click="goToBooking">Book tid</button>
+    <a href="#prices" class="nav-button">Priser og ydelser</a>
+    <a href="#about" class="nav-button">Om Muskelmekanikeren</a>
+    <a href="#contact" class="nav-button">Kontakt</a>
+    <a class="nav-button book-button" @click="goToBooking">Book tid</a>
   </nav>
 </template>
 
@@ -17,34 +17,36 @@ const goToBooking = () => {
 .sticky-navbar {
   position: sticky;
   top: 0;
-  background-color: #333;
   display: flex;
   justify-content: center;
   padding: 10px;
   z-index: 100;
+  background-color: #cbe2ec;
 }
 
-.sticky-navbar a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-}
-
-.sticky-navbar a:hover {
-  text-decoration: underline;
-}
-
-.book-button {
-  background-color: #007bff;
-  color: white;
+.nav-button {
+  background-color: #f7a941;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  color: black;
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
-  cursor: pointer;
+  margin: 0 45px;
+  text-decoration: none;
+  text-align: center;
   font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 12%;
 }
 
-.book-button:hover {
+.nav-button:hover {
   background-color: #0056b3;
+  text-decoration: none;
+}
+
+.book-button {
+  background-color: #f7a941;
 }
 </style>

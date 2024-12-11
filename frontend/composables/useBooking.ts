@@ -2,7 +2,6 @@
 import { ref } from "vue";
 
 export const useBooking = () => {
-  // Use useState to persist data between route changes
   const bookingData = useState("bookingData", () => ({
     service: null,
     date: null,

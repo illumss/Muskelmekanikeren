@@ -12,7 +12,10 @@
 
 <style scoped>
 .about-section {
-  padding: 5rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
   background: #233d4d;
   color: white;
   display: flex;

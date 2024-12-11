@@ -46,7 +46,10 @@ const testimonials = [
 
 <style scoped>
 .testimonials-section {
-  padding: 5rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
   background-color: #f5f3f3;
 }
 
@@ -70,6 +73,10 @@ const testimonials = [
   align-items: center;
   flex-direction: column;
   position: relative;
+}
+
+h1 {
+  margin-bottom: 2rem;
 }
 
 .role {
