@@ -70,10 +70,12 @@
     </div>
 
     <div class="logo-container">
-      <img
-        src="/images/logo_orange.svg"
-        alt="Muskel Mekanikeren Logo"
-        class="logo" />
+      <a href="/">
+        <img
+          src="/images/logo_orange.svg"
+          alt="Muskel Mekanikeren Logo"
+          class="logo"
+      /></a>
     </div>
   </footer>
 </template>

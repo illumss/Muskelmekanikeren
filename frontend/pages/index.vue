@@ -18,6 +18,6 @@ import Footer from "~/components/8Footer.vue";
     <section id="about"><AboutSection /></section>
     <section id="testimonials"><TestimonialsSection /></section>
     <section id="gallery"><GallerySection /></section>
-    <Footer id="contact" />
+    <section id="contact"><Footer /></section>
   </div>
 </template>
