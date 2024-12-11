@@ -47,7 +47,7 @@ const testimonials = [
 <style scoped>
 .testimonials-section {
   padding: 5rem;
-  background-color: #f7f7f7;
+  background-color: #f5f3f3;
 }
 
 .testimonial-container {

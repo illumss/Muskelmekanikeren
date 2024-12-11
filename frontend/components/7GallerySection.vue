@@ -1,18 +1,22 @@
 <template>
   <div class="gallery-section">
-    <img src="/images/dennis_okholm.png" alt="Owner" />
-    <img src="/images/clinic-photo2.png" alt="Clinic" />
+    <div class="gallery-container">
+      <img src="/images/dennis_okholm.png" alt="Owner" />
+      <img src="/images/clinic-photo2.png" alt="Clinic" />
+    </div>
   </div>
 </template>
 
 <style scoped>
 .gallery-section {
-  padding: 2rem;
-  text-align: center;
+  background-color: #f5f3f3;
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: row;
 }
 img {
-  width: 100%;
-  max-width: 300px;
-  margin: 10px;
+  width: 50%;
 }
 </style>
