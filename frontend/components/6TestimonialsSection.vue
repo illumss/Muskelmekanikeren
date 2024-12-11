@@ -1,78 +1,105 @@
 <template>
   <div class="testimonials-section">
-    <h2>Testimonials</h2>
-    <div class="testimonial-card">
-      <img src="/images/testimonial_1.jpg" alt="Kira Hansen" />
-      <h3>Kira Hansen</h3>
-      <p>Tandplejer</p>
-      <blockquote>
-        "Jeg opsøgte Dennis pga. skuldersmerter. Han undersøgte mig grundigt og
-        lavede et træningsprogram med progression. Nu er min skulder symptomfri,
-        og jeg er stærkere end før. Jeg kan varmt anbefale Dennis."
-      </blockquote>
-    </div>
-    <div class="testimonial-card">
-      <img src="/images/testimonial_2.jpg" alt="Jens Jacobsen" />
-      <h3>Jens Jacobsen</h3>
-      <p>Crossfitter</p>
-      <blockquote>
-        "Som crossfitter på højt niveau, er det for mig vigtigt med professionel
-        behandling. Hos Dennis har jeg modtaget målrettet behandling og fået høj
-        faglig vurdering af mine 'skader'."
-      </blockquote>
-    </div>
-    <div class="testimonial-card">
-      <img src="/images/testimonial_3.jpg" alt="Maria Eg" />
-      <h3>Maria Eg</h3>
-      <p>Stud. BSc idræt</p>
-      <blockquote>
-        "Jeg var i behandling hos Dennis i 4-5 måneder for en ankelskade. Han
-        fandt hurtigt den rette behandling og gav mig øvelser til at støtte
-        forløbet. I dag har jeg ingen gener og bruger stadig øvelserne."
-      </blockquote>
+    <h1>Anmeldelser</h1>
+    <div class="testimonial-container">
+      <div
+        class="testimonial-card"
+        v-for="(testimonial, index) in testimonials"
+        :key="index">
+        <img :src="testimonial.image" :alt="testimonial.name" class="person" />
+        <h3 class="name">{{ testimonial.name }}</h3>
+        <p class="role">{{ testimonial.role }}</p>
+        <img src="/images/quote-icon.png" alt="Quote" class="quote-icon" />
+        <p class="quote">
+          {{ testimonial.quote }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
+<script setup>
+const testimonials = [
+  {
+    name: "Kira Hansen",
+    role: "Tandplejer",
+    image: "/images/testimonial_1.jpg",
+    quote:
+      "Jeg opsøgte Dennis pga. skuldersmerter. Han undersøgte mig grundigt og lavede et træningsprogram med progression. Nu er min skulder symptomfri, og jeg er stærkere end før. Jeg kan varmt anbefale Dennis.",
+  },
+  {
+    name: "Jens Jacobsen",
+    role: "Crossfitter",
+    image: "/images/testimonial_2.jpg",
+    quote:
+      "Som crossfitter på højt niveau, er det for mig vigtig med professionel behandling. Hos Dennis har jeg mødt målrettet behandling og fået høj faglig vurdering af mine “skader”.",
+  },
+  {
+    name: "Maria Eg",
+    role: "Stud. BSc idræt",
+    image: "/images/testimonial_3.jpg",
+    quote:
+      "Jeg var i behandling hos Dennis i 4-5 måneder for en ankelskade. Han fandt hurtigt den rette behandling og gav mig øvelser til at støtte forløbet. I dag har jeg ingen gener og bruger stadig øvelserne.",
+  },
+];
+</script>
+
 <style scoped>
 .testimonials-section {
-  padding: 3rem;
-  text-align: center;
+  padding: 5rem;
   background-color: #f7f7f7;
+}
+
+.testimonial-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .testimonial-card {
   background-color: #e8f1f8;
   border-radius: 10px;
-  padding: 2rem;
-  margin: 1.5rem auto;
+  padding: 2rem 2rem 2rem;
+  margin: 2rem auto;
   width: 90%;
-  max-width: 500px;
+  max-width: 300px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
-.testimonial-card img {
-  width: 80px;
-  height: 80px;
+.role {
+  color: #727272;
+  margin: 0;
+  padding: 0;
+}
+
+.person {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1rem;
+  position: absolute;
+  top: -40px;
+  border: 4px solid #e8f1f8;
 }
 
 .testimonial-card h3 {
-  font-size: 1.5rem;
-  margin: 0.5rem 0;
+  margin: 2.5rem 0 0.5rem;
 }
 
-.testimonial-card p {
-  font-weight: bold;
-  color: #555;
+.quote-icon {
+  width: 20px;
+  height: 20px;
+  align-self: flex-start;
 }
 
-blockquote {
-  font-style: italic;
+.quote {
   margin: 1rem auto;
-  color: #333;
+  color: #575757;
 }
 </style>

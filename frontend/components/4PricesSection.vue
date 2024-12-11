@@ -160,7 +160,7 @@ h3 {
 .readmore {
   font-size: 0.8rem;
   font-weight: bold;
-  color: #f4a300;
+  color: #f7a941;
   cursor: pointer;
   text-align: right;
   margin-top: 1.5rem;
