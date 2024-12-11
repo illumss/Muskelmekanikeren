@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPNeueMontreal";
+  src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Manrope", sans-serif;
+  font-size: small;
+}
+
+h2 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: xxx-large;
+}
+
+h3 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: xx-large;
+}
+
+p {
+  font-family: "PPNeueMontreal", sans-serif;
+}

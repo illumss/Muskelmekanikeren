@@ -1,10 +1,10 @@
 <template>
   <div class="message-section">
-    <h2>Mission</h2>
-    <p>
+    <h1>Mission</h1>
+    <h2>
       Jeg hjælper dig med at overkomme begrænsende smerter og forbedre din
       præstation.
-    </p>
+    </h2>
     <img src="/images/fitness-photo.png" alt="Fitness" />
     <img src="/images/clinic-photo.png" alt="Clinic" />
   </div>
@@ -12,7 +12,7 @@
 
 <style scoped>
 .message-section {
-  background-color: #f8f8f8;
+  background-color: #e0eaef;
   padding: 2rem;
   text-align: center;
 }

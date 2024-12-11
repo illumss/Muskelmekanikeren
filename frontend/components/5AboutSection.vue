@@ -14,5 +14,7 @@
 .about-section {
   padding: 2rem;
   text-align: center;
+  background: #233d4d;
+  color: white;
 }
 </style>

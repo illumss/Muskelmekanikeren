@@ -4,4 +4,5 @@ export default {
   },
 
   compatibilityDate: "2024-12-09",
+  css: ["@/styles/global.css"],
 };

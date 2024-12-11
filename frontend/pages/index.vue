@@ -1,9 +1,9 @@
 <script setup>
 import PageHeader from "~/components/1PageHeader.vue";
 import StickyNavbar from "~/components/2StickyNavbar.vue";
-import AboutSection from "~/components/3AboutSection.vue";
+import MessageSection from "~/components/3MessageSection.vue";
 import PricesSection from "~/components/4PricesSection.vue";
-import MessageSection from "~/components/5MessageSection.vue";
+import AboutSection from "~/components/5AboutSection.vue";
 import TestimonialsSection from "~/components/6TestimonialsSection.vue";
 import GallerySection from "~/components/7GallerySection.vue";
 import Footer from "~/components/8Footer.vue";
