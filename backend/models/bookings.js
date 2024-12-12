@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const BookingSchema = new mongoose.Schema({
-  service: { type: String, required: false }, // Make this optional for Step 1
+  service: { type: String, required: false },
   date: { type: String, required: false },
   time: { type: String, required: false },
   userInfo: {

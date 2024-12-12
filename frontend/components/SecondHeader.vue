@@ -10,10 +10,6 @@
         <slot name="clinic-name">Dennis Okholm</slot>
       </a>
     </div>
-    <img
-      src="/images/muskelmekanikeren.png"
-      alt="Clinic Name"
-      class="header-text" />
   </header>
 </template>
 
@@ -25,7 +21,7 @@
 }
 .header-img {
   width: 100%;
-  height: 80vh;
+  height: 15vh;
   object-fit: cover;
 }
 .color-overlay {
@@ -33,7 +29,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 97%;
   background-color: #8dc8e2;
   opacity: 0.4;
   z-index: 1;

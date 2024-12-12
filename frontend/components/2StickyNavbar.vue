@@ -38,16 +38,15 @@ onMounted(() => {
     },
     {
       root: null,
-      threshold: 0.5, // Lower threshold for better detection
+      threshold: 0.5,
     }
   );
 
   sections.forEach((section) => observer.observe(section));
 
-  // Smooth scrolling
   navButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      const targetId = button.getAttribute("href")?.slice(1); // Extract ID from href
+      const targetId = button.getAttribute("href")?.slice(1);
       const targetSection = document.getElementById(targetId);
 
       if (targetSection) {
