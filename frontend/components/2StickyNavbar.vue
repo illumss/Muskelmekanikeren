@@ -75,25 +75,25 @@ onMounted(() => {
   font-weight: 700;
   color: black;
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   padding: 10px 15px;
   margin: 0 45px;
   text-decoration: none;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   display: inline-block;
   min-width: 12%;
 }
 
 .nav-button:hover {
-  background-color: #7e5828;
-  color: white;
+  background-color: #233d4d;
+  color: #f7a941;
 }
 
 .nav-button.active {
-  background-color: #7e5828;
-  color: white;
+  background-color: #233d4d;
+  color: #f7a941;
 }
 
 .book-button {
