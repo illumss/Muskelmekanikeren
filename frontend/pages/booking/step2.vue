@@ -1,56 +1,95 @@
 <template>
-  <div class="booking-container">
-    <h1>Vælg en dato og tidspunkt</h1>
-
-    <!-- Calendar Navigation -->
-    <div class="calendar-navigation">
-      <button @click="changeMonth(-1)" class="nav-button">
-        &#8592; Previous
-      </button>
-      <h2>{{ currentMonthName }} {{ currentYear }}</h2>
-      <button @click="changeMonth(1)" class="nav-button">Next &#8594;</button>
+  <SecondHeader />
+  <div class="step-two-page">
+    <div class="image-container">
+      <img
+        src="/public/images/booking-pic.png"
+        alt="Booking"
+        class="booking-pic" />
     </div>
 
-    <!-- Calendar Grid -->
-    <div class="calendar-grid">
-      <div
-        v-for="(day, index) in daysInMonth"
-        :key="index"
-        class="calendar-day">
-        <button
-          :class="{ selected: selectedDate === day }"
-          :disabled="!isDateEnabled(day)"
-          @click="selectDate(day)">
-          {{ day }}
+    <div class="booking-container">
+      <h1>Vælg en dato og tidspunkt</h1>
+
+      <div class="calendar-navigation">
+        <button @click="changeMonth(-1)" class="nav-button">&#8592;</button>
+        <h4>{{ currentMonthName }} {{ currentYear }}</h4>
+        <button @click="changeMonth(1)" class="nav-button">&#8594;</button>
+      </div>
+
+      <div class="calendar-grid">
+        <div
+          v-for="(day, index) in daysInMonth"
+          :key="index"
+          class="calendar-day">
+          <button
+            :class="{
+              selected:
+                selectedDate ===
+                `${currentYear.value}-${currentMonth.value + 1}-${day}`,
+            }"
+            :disabled="!isDateEnabled(day)"
+            @click="selectDate(day)">
+            {{ day }}
+          </button>
+        </div>
+      </div>
+
+      <div v-if="availableTimes.length" class="available-times">
+        <h4 class="second-title">Ledige tider for {{ formatSelectedDate }}</h4>
+        <ul>
+          <li
+            v-for="(time, index) in availableTimes"
+            :key="index"
+            class="time-slot">
+            <input
+              type="radio"
+              :id="`time-${index}`"
+              :value="time"
+              v-model="selectedTime"
+              class="time-input"
+              :checked="selectedTime === time" />
+            <label :for="`time-${index}`" class="time-label">{{ time }}</label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <button @click="goBack">
+          <svg
+            width="100"
+            height="101"
+            viewBox="0 0 100 101"
+            fill="none"
+            class="back-button">
+            <path
+              d="M50 100.306C22.379 100.306 0 77.9266 0 50.3057C0 22.6847 22.379 0.305664 50 0.305664C77.621 0.305664 100 22.6847 100 50.3057C100 77.9266 77.621 100.306 50 100.306ZM73.3871 41.4347H50V27.1403C50 24.9831 47.379 23.8944 45.8669 25.4266L22.8226 48.592C21.875 49.5395 21.875 51.0516 22.8226 51.9992L45.8669 75.1645C47.3992 76.6968 50 75.6081 50 73.4508V59.1766H73.3871C74.7177 59.1766 75.8064 58.0879 75.8064 56.7573V43.854C75.8064 42.5234 74.7177 41.4347 73.3871 41.4347Z"
+              fill="currentColor" />
+          </svg>
+        </button>
+        <button :disabled="!selectedDate || !selectedTime" @click="goToStep3">
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
+            fill="none"
+            class="next-button">
+            <path
+              d="M50 0C77.621 0 100 22.379 100 50C100 77.621 77.621 100 50 100C22.379 100 0 77.621 0 50C0 22.379 22.379 0 50 0ZM26.6129 58.871H50V73.1653C50 75.3226 52.621 76.4113 54.1331 74.879L77.1774 51.7137C78.125 50.7661 78.125 49.254 77.1774 48.3065L54.1331 25.121C52.6008 23.5887 50 24.6774 50 26.8347V41.129H26.6129C25.2823 41.129 24.1936 42.2177 24.1936 43.5484V56.4516C24.1936 57.7823 25.2823 58.871 26.6129 58.871Z"
+              fill="currentColor" />
+          </svg>
         </button>
       </div>
-    </div>
 
-    <!-- Available Times -->
-    <div v-if="availableTimes.length" class="available-times">
-      <h2>Available Times</h2>
-      <ul>
-        <li
-          v-for="(time, index) in availableTimes"
-          :key="index"
-          class="time-slot">
-          <input
-            type="radio"
-            :id="`time-${index}`"
-            :value="time"
-            v-model="selectedTime"
-            class="time-input" />
-          <label :for="`time-${index}`" class="time-label">{{ time }}</label>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="button-group">
-      <button @click="goBack" class="back-button">Back</button>
-      <button :disabled="!selectedTime" @click="goToStep3" class="next-button">
-        Next
-      </button>
+      <div class="progress-bar">
+        <div class="progress-step filled"></div>
+        <div class="space"></div>
+        <div class="progress-step filled"></div>
+        <div class="space"></div>
+        <div class="progress-step"></div>
+        <div class="space"></div>
+        <div class="progress-step"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +103,13 @@ const router = useRouter();
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
 const selectedDate = ref(bookingData.value?.date || null);
+const formatSelectedDate = computed(() => {
+  if (!selectedDate.value) return "";
+
+  const date = new Date(selectedDate.value);
+  const options = { day: "numeric", month: "long" };
+  return date.toLocaleDateString("da-DK", options);
+});
 const selectedTime = ref(bookingData.value?.time || null);
 const availableTimes = ref([]);
 
@@ -79,6 +125,7 @@ const daysInMonth = computed(() => {
 });
 
 const selectDate = (day) => {
+  console.log("Selected day:", day);
   selectedDate.value = `${currentYear.value}-${currentMonth.value + 1}-${day}`;
   fetchAvailableTimes();
 };
@@ -90,7 +137,9 @@ const fetchAvailableTimes = () => {
 const isDateEnabled = (day) => {
   const date = new Date(currentYear.value, currentMonth.value, day);
   const today = new Date();
-  return date >= today;
+  const dayOfWeek = date.getDay();
+
+  return date >= today && dayOfWeek !== 0 && dayOfWeek !== 6;
 };
 
 const changeMonth = (delta) => {
@@ -108,6 +157,7 @@ const changeMonth = (delta) => {
 
 const goBack = () => {
   changeStep(1);
+  router.push("/booking/step1");
 };
 
 const goToStep3 = () => {
@@ -117,59 +167,76 @@ const goToStep3 = () => {
   router.push("/booking/step3");
 };
 
-// Initialize component
 onMounted(() => {
   console.log("Step2 mounted, current booking data:", bookingData.value);
 });
 </script>
 
 <style scoped>
+.step-two-page {
+  max-width: 1000px;
+  margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.image-container {
+  width: 30%;
+}
+
+.booking-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .booking-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+
+  padding: 2rem;
+  width: 70%;
+  padding-top: 5rem;
 }
 
 h1 {
-  font-size: 28px;
-  color: #4caf50;
-  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
 }
 
 .calendar-navigation {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .nav-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
+  color: #646464;
+  padding: 0;
+  font-size: 25px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.nav-button:hover {
-  background-color: #0056b3;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 8px;
+  align-self: center;
   margin-bottom: 20px;
 }
 
 .calendar-day button {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: none;
   background: #f0f0f0;
   border-radius: 50%;
@@ -179,11 +246,11 @@ h1 {
 }
 
 .calendar-day button:hover {
-  background: #d0d0d0;
+  background: #f7a941;
+  color: white;
 }
-
 .calendar-day button.selected {
-  background: #007bff;
+  background: #f7a941;
   color: white;
 }
 
@@ -193,58 +260,99 @@ h1 {
 }
 
 .available-times {
-  margin-top: 20px;
+  margin-top: 2rem;
+  font-family: "PPNeueMontreal", sans-serif;
+}
+
+.second-title {
+  margin-bottom: 1.8rem;
+}
+ul {
+  padding: 0;
 }
 
 .time-slot {
   margin-bottom: 10px;
+  display: inline-block;
+  margin: 0 10px;
 }
 
 .time-input {
-  margin-right: 10px;
+  display: none;
 }
 
 .time-label {
-  font-size: 16px;
+  padding: 5px 5px;
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+}
+
+.time-input:checked + .time-label {
+  background-color: #f7a941;
+  color: white;
+}
+
+.time-label:hover {
+  background-color: #e2e2e2;
 }
 
 .button-group {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-button {
-  padding: 12px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
+  justify-content: space-evenly;
 }
 
 .back-button {
-  background-color: #f8f9fa;
-  color: #333;
-  border: 1px solid #ccc;
-}
-
-.back-button:hover {
-  background-color: #e2e6ea;
-  border-color: #adb5bd;
+  color: #aaaaaa;
 }
 
 .next-button {
-  background-color: #28a745;
+  color: #f7a941;
 }
 
-.next-button:hover {
-  background-color: #218838;
+button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: white;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button:disabled .next-button {
+  color: #aaaaaa;
+  cursor: not-allowed;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.progress-step {
+  width: 70px;
+  height: 15px;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+}
+
+.progress-step.filled {
+  background-color: #233d4d;
+}
+
+.space {
+  width: 10px;
+  background-color: white;
 }
 </style>

@@ -23,30 +23,48 @@
           class="service-item">
           <input
             type="radio"
-            :id="`service-${index}`"
+            :id="'service-' + index"
             :value="service"
             v-model="selectedService"
             class="service-input" />
-          <label :for="`service-${index}`" class="service-label">
+          <label :for="'service-' + index" class="service-label">
             {{ service }}
           </label>
         </li>
       </ul>
 
       <div class="button-group">
-        <button class="back-button" @click="goToHomepage">
-          <img src="/public/images/left-arrow.svg" alt="Back" />
+        <button @click="goToHomepage">
+          <svg
+            width="100"
+            height="101"
+            viewBox="0 0 100 101"
+            fill="none"
+            class="back-button">
+            <path
+              d="M50 100.306C22.379 100.306 0 77.9266 0 50.3057C0 22.6847 22.379 0.305664 50 0.305664C77.621 0.305664 100 22.6847 100 50.3057C100 77.9266 77.621 100.306 50 100.306ZM73.3871 41.4347H50V27.1403C50 24.9831 47.379 23.8944 45.8669 25.4266L22.8226 48.592C21.875 49.5395 21.875 51.0516 22.8226 51.9992L45.8669 75.1645C47.3992 76.6968 50 75.6081 50 73.4508V59.1766H73.3871C74.7177 59.1766 75.8064 58.0879 75.8064 56.7573V43.854C75.8064 42.5234 74.7177 41.4347 73.3871 41.4347Z"
+              fill="currentColor" />
+          </svg>
         </button>
-        <button
-          class="next-button"
-          :disabled="!selectedService"
-          @click="goToStep2">
-          <img src="/public/images/right-arrow.svg" alt="Next" />
+
+        <button :disabled="!selectedService" @click="goToStep2">
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
+            fill="none"
+            class="next-button">
+            <path
+              d="M50 0C77.621 0 100 22.379 100 50C100 77.621 77.621 100 50 100C22.379 100 0 77.621 0 50C0 22.379 22.379 0 50 0ZM26.6129 58.871H50V73.1653C50 75.3226 52.621 76.4113 54.1331 74.879L77.1774 51.7137C78.125 50.7661 78.125 49.254 77.1774 48.3065L54.1331 25.121C52.6008 23.5887 50 24.6774 50 26.8347V41.129H26.6129C25.2823 41.129 24.1936 42.2177 24.1936 43.5484V56.4516C24.1936 57.7823 25.2823 58.871 26.6129 58.871Z"
+              fill="currentColor" />
+          </svg>
         </button>
       </div>
 
       <div class="progress-bar">
         <div class="progress-step filled"></div>
+        <div class="space"></div>
+        <div class="progress-step"></div>
         <div class="space"></div>
         <div class="progress-step"></div>
         <div class="space"></div>
@@ -68,7 +86,7 @@ const services = [
   "Fysisk konsultation",
   "Massage",
   "IMS Akupunktur",
-  "Led mobilisering",
+  "Ledmobilisering",
   "Personlig træning",
   "Kropsterapi",
 ];
@@ -110,18 +128,18 @@ const goToStep2 = async () => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 .image-container {
   width: 30%;
-  padding: 0;
-  height: 100%;
 }
 
 .booking-pic {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-
 .service-container {
   display: flex;
   flex-direction: column;
@@ -135,7 +153,7 @@ h1 {
   font-size: 1.8rem;
   font-weight: bold;
   padding: 0;
-  margin: 0;
+  margin: 0 10px 2rem 10px;
 }
 
 .service-list {
@@ -181,8 +199,8 @@ h1 {
 }
 
 .service-input:checked + .service-label::before {
-  background-color: #4caf50;
-  border-color: #4caf50;
+  background-color: #f7a941;
+  border-color: #f7a941;
 }
 
 .service-label::after {
@@ -202,7 +220,15 @@ h1 {
 
 .button-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.back-button {
+  color: #aaaaaa;
+}
+
+.next-button {
+  color: #f7a941;
 }
 
 button {
@@ -221,15 +247,9 @@ button:hover {
   transform: scale(1.1);
 }
 
-button:disabled {
-  background-color: #cccccc;
-  border-radius: 30px;
+button:disabled .next-button {
+  color: #aaaaaa;
   cursor: not-allowed;
-}
-
-button img {
-  width: 40px;
-  height: 40px;
 }
 
 .progress-bar {

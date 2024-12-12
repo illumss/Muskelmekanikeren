@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Service is required for Step 1" });
     }
 
-    const newBooking = new Booking({ service }); // Create with service only
+    const newBooking = new Booking({ service });
     const savedBooking = await newBooking.save();
     res.status(201).json(savedBooking);
   } catch (error) {

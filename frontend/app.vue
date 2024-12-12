@@ -15,5 +15,7 @@ useSeoMeta({
 <style scoped>
 #app {
   color: black;
+  padding: 0;
+  margin: 0;
 }
 </style>
