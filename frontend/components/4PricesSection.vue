@@ -7,29 +7,15 @@
         <p class="subtitle">{{ item.subtitle }}</p>
         <p class="price">{{ item.price }}</p>
         <p class="note" v-if="item.note">{{ item.note }}</p>
-        <div class="readmore" @click="toggleExpand(index)">
-          {{ expandedIndex === index ? "Læs mindre ↑" : "Læs mere ↓" }}
+        <div class="description">
+          <p>{{ item.description }}</p>
         </div>
-
-        <transition name="fade">
-          <div v-if="expandedIndex === index" class="description">
-            <p>{{ item.description }}</p>
-          </div>
-        </transition>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const expandedIndex = ref(null);
-
-const toggleExpand = (index) => {
-  expandedIndex.value = expandedIndex.value === index ? null : index;
-};
-
 const prices = [
   {
     title: "Fysioterapi",
@@ -147,7 +133,7 @@ h1 {
 }
 
 .note {
-  color: #888;
+  color: #f7a941;
   font-size: 0.8rem;
   margin-bottom: 1rem;
 }
@@ -162,26 +148,6 @@ h1 {
 h3 {
   padding: 0;
   margin: 0;
-}
-
-.readmore {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: #f7a941;
-  cursor: pointer;
-  text-align: right;
-  margin-top: 1.5rem;
-  font-family: "PPNeueMontreal", sans-serif;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 
 @media (max-width: 1440px) {
