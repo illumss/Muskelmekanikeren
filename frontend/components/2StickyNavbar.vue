@@ -23,6 +23,25 @@ onMounted(() => {
 
   let isSticky = false;
 
+  // Function to update the sticky class based on scroll and screen size
+  const updateStickyClass = () => {
+    const shouldBeSticky = window.scrollY > 450;
+    const isSmallScreen = window.innerWidth <= 960;
+
+    if (shouldBeSticky && !isSticky) {
+      navbar.classList.add("sticky");
+      if (isSmallScreen) {
+        navbar.classList.add("vertical");
+      }
+      isSticky = true;
+    } else if (!shouldBeSticky && isSticky) {
+      navbar.classList.remove("sticky");
+      navbar.classList.remove("vertical");
+      isSticky = false;
+    }
+  };
+
+  // Intersection Observer for active section highlighting
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -43,8 +62,10 @@ onMounted(() => {
     }
   );
 
+  // Observe each section for active state
   sections.forEach((section) => observer.observe(section));
 
+  // Smooth scrolling for navigation buttons
   navButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       const targetId = button.getAttribute("href")?.slice(1);
@@ -57,21 +78,15 @@ onMounted(() => {
     });
   });
 
-  const onScroll = () => {
-    const shouldBeSticky = window.scrollY > 450;
-    if (shouldBeSticky && !isSticky) {
-      navbar.classList.add("sticky");
-      isSticky = true;
-    } else if (!shouldBeSticky && isSticky) {
-      navbar.classList.remove("sticky");
-      isSticky = false;
-    }
-  };
+  // Attach scroll and resize listeners
+  window.addEventListener("scroll", updateStickyClass);
+  window.addEventListener("resize", updateStickyClass);
 
-  window.addEventListener("scroll", onScroll);
-
+  // Cleanup on unmount
   onUnmounted(() => {
-    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("scroll", updateStickyClass);
+    window.removeEventListener("resize", updateStickyClass);
+    observer.disconnect();
   });
 });
 </script>
@@ -92,6 +107,12 @@ onMounted(() => {
   position: fixed;
   top: 0;
   justify-content: flex-start;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.sticky-navbar.sticky.vertical {
   flex-direction: column;
   height: 100vh;
   width: 12%;
@@ -104,7 +125,7 @@ onMounted(() => {
   background-color: #f7a941;
   font-family: "Manrope", sans-serif;
   font-weight: 700;
-  color: black;
+  color: #233d4d;
   border: none;
   border-radius: 30px;
   padding: 10px 15px;
@@ -118,12 +139,27 @@ onMounted(() => {
   transition: color 0.3s ease;
 }
 
-.sticky-navbar.sticky .nav-button {
+.sticky-navbar.sticky.vertical .nav-button {
   margin: 15px 0;
   width: 100%;
   margin: 10px;
   text-align: left;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 960px) {
+  .sticky-navbar {
+    padding: 0px;
+  }
+  .sticky-navbar.sticky {
+    flex-direction: column;
+  }
+  .nav-button {
+    margin: 10px 10px;
+    font-size: 12px;
+    padding: 6px 10px;
+    min-width: 20%;
+  }
 }
 
 .nav-button:hover {
