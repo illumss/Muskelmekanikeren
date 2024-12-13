@@ -23,7 +23,6 @@ onMounted(() => {
 
   let isSticky = false;
 
-  // Function to update the sticky class based on scroll and screen size
   const updateStickyClass = () => {
     const shouldBeSticky = window.scrollY > 450;
     const isSmallScreen = window.innerWidth <= 960;
@@ -41,7 +40,6 @@ onMounted(() => {
     }
   };
 
-  // Intersection Observer for active section highlighting
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -62,10 +60,8 @@ onMounted(() => {
     }
   );
 
-  // Observe each section for active state
   sections.forEach((section) => observer.observe(section));
 
-  // Smooth scrolling for navigation buttons
   navButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       const targetId = button.getAttribute("href")?.slice(1);
@@ -78,11 +74,9 @@ onMounted(() => {
     });
   });
 
-  // Attach scroll and resize listeners
   window.addEventListener("scroll", updateStickyClass);
   window.addEventListener("resize", updateStickyClass);
 
-  // Cleanup on unmount
   onUnmounted(() => {
     window.removeEventListener("scroll", updateStickyClass);
     window.removeEventListener("resize", updateStickyClass);
@@ -106,7 +100,6 @@ onMounted(() => {
 .sticky-navbar.sticky {
   position: fixed;
   top: 0;
-  justify-content: flex-start;
   flex-direction: row;
   height: auto;
   width: 100%;
@@ -119,6 +112,7 @@ onMounted(() => {
   min-width: 100px;
   padding: 50px 0px;
   background-color: transparent;
+  justify-content: flex-start;
 }
 
 .nav-button {
