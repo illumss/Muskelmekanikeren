@@ -89,6 +89,7 @@ const prices = [
   padding-left: 8rem;
   padding-right: 8rem;
   background-color: #f5f3f3;
+  overflow: hidden;
 }
 
 h1 {
@@ -181,5 +182,32 @@ h3 {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 1440px) {
+  .prices-section {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .price-box {
+    flex: 0 0 250px;
+  }
+}
+
+@media (max-width: 960px) {
+  .prices-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  :deep(h1) {
+    margin-left: 2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  :deep(h1) {
+    margin-left: 1rem;
+  }
 }
 </style>

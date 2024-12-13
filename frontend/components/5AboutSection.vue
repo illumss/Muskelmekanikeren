@@ -36,4 +36,48 @@
   align-self: flex-end;
   z-index: 1;
 }
+
+@media (max-width: 1440px) {
+  .about-section {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  :deep(.about-image) {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 960px) {
+  .about-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  :deep(h1) {
+    margin-left: 2rem;
+  }
+
+  .about {
+    font-size: 1.8rem;
+  }
+
+  .about-image {
+    margin-top: 2rem;
+    max-width: 150px;
+  }
+}
+@media (max-width: 375px) {
+  .about {
+    font-size: 1.2rem;
+  }
+  :deep(h1) {
+    margin-left: 1rem;
+  }
+
+  .about-image {
+    margin-top: 0;
+    max-width: 180px;
+  }
+}
 </style>

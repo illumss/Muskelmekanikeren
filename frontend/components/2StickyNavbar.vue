@@ -3,24 +3,25 @@
     <a href="#prices" class="nav-button" data-section="prices"
       >Priser og ydelser</a
     >
-    <a href="#about" class="nav-button" data-section="about"
-      >Om Muskelmekanikeren</a
-    >
+    <a href="#about" class="nav-button" data-section="about">Om os</a>
     <a href="#contact" class="nav-button" data-section="contact">Kontakt</a>
     <a class="nav-button book-button" @click="goToBooking">Book tid</a>
   </nav>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 
 const goToBooking = () => {
   navigateTo("/booking/step1");
 };
 
 onMounted(() => {
+  const navbar = document.querySelector(".sticky-navbar");
   const sections = document.querySelectorAll("section");
   const navButtons = document.querySelectorAll(".nav-button");
+
+  let isSticky = false;
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -55,6 +56,23 @@ onMounted(() => {
       }
     });
   });
+
+  const onScroll = () => {
+    const shouldBeSticky = window.scrollY > 450;
+    if (shouldBeSticky && !isSticky) {
+      navbar.classList.add("sticky");
+      isSticky = true;
+    } else if (!shouldBeSticky && isSticky) {
+      navbar.classList.remove("sticky");
+      isSticky = false;
+    }
+  };
+
+  window.addEventListener("scroll", onScroll);
+
+  onUnmounted(() => {
+    window.removeEventListener("scroll", onScroll);
+  });
 });
 </script>
 
@@ -66,7 +84,20 @@ onMounted(() => {
   justify-content: center;
   padding: 10px;
   z-index: 100;
-  background-color: #cbe2ec;
+  background-color: #e0eaef;
+  transition: 0.3s ease;
+}
+
+.sticky-navbar.sticky {
+  position: fixed;
+  top: 0;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100vh;
+  width: 12%;
+  min-width: 100px;
+  padding: 50px 0px;
+  background-color: transparent;
 }
 
 .nav-button {
@@ -84,6 +115,15 @@ onMounted(() => {
   cursor: pointer;
   display: inline-block;
   min-width: 12%;
+  transition: color 0.3s ease;
+}
+
+.sticky-navbar.sticky .nav-button {
+  margin: 15px 0;
+  width: 100%;
+  margin: 10px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button:hover {
@@ -98,5 +138,30 @@ onMounted(() => {
 
 .book-button {
   background-color: #f7a941;
+}
+
+@media (max-width: 1440px) {
+  .sticky-navbar {
+    padding: 8px;
+  }
+  :deep(.nav-button) {
+    margin: 0 20px;
+    font-size: 13px;
+    padding: 8px 12px;
+    min-width: 15%;
+  }
+}
+
+@media (max-width: 960px) {
+  .sticky-navbar {
+    flex-wrap: wrap;
+    padding: 0px;
+  }
+  :deep(.nav-button) {
+    margin: 10px 10px;
+    font-size: 12px;
+    padding: 6px 10px;
+    min-width: 20%;
+  }
 }
 </style>

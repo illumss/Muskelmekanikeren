@@ -22,12 +22,16 @@
   position: relative;
   text-align: center;
   color: white;
+  height: 80vh;
+  overflow: hidden;
 }
+
 .header-img {
   width: 100%;
-  height: 80vh;
+  height: 100%;
   object-fit: cover;
 }
+
 .color-overlay {
   position: absolute;
   top: 0;
@@ -38,6 +42,7 @@
   opacity: 0.4;
   z-index: 1;
 }
+
 .header-logo {
   position: absolute;
   top: 20px;
@@ -46,6 +51,7 @@
   height: auto;
   z-index: 2;
 }
+
 .header-name {
   position: absolute;
   top: 40px;
@@ -55,6 +61,7 @@
   color: white;
   z-index: 2;
 }
+
 .header-text {
   position: absolute;
   top: 50%;
@@ -67,5 +74,52 @@
 a {
   color: white;
   text-decoration: none;
+}
+
+@media (max-width: 1440px) {
+  .page-header {
+    height: 60vh;
+  }
+  :deep(.header-logo) {
+    width: 60px;
+  }
+  :deep(.header-name) {
+    font-size: 1.2rem;
+  }
+  :deep(.header-text) {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 960px) {
+  .page-header {
+    height: 50vh;
+  }
+  :deep(.header-logo) {
+    top: 10px;
+    left: 10px;
+    width: 50px;
+  }
+  :deep(.header-name) {
+    top: 30px;
+    right: 10px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .page-header {
+    height: 40vh;
+  }
+  :deep(.header-logo) {
+    width: 40px;
+  }
+  :deep(.header-name) {
+    font-size: 0.8rem;
+  }
+  :deep(.header-text) {
+    max-width: 90%;
+    font-size: 0.9rem;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 export default {
   axios: {
-    baseURL: "http://localhost:5000/api", // Point to your backend API
+    baseURL: "http://localhost:5000/api",
   },
 
   compatibilityDate: "2024-12-09",

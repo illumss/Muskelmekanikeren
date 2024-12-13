@@ -51,14 +51,6 @@
   color: white;
   z-index: 2;
 }
-.header-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  max-width: 80%;
-}
 
 a {
   color: white;

@@ -109,4 +109,60 @@ h1 {
   margin: 1rem auto;
   color: #575757;
 }
+@media (max-width: 1440px) {
+  .testimonials-section {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media (max-width: 960px) {
+  .testimonials-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  :deep(h1) {
+    margin-left: 2rem;
+  }
+
+  :deep(.testimonial-card) {
+    padding: 1.5rem;
+  }
+
+  :deep(.person) {
+    width: 80px;
+    height: 80px;
+  }
+
+  :deep(.testimonial-card h3) {
+    margin: 2rem 0 0.5rem;
+  }
+
+  :deep(.quote) {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 375px) {
+  .testimonials-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  :deep(h1) {
+    margin-left: 1rem;
+  }
+
+  :deep(.testimonial-card) {
+    padding: 1rem;
+  }
+
+  :deep(.person) {
+    width: 60px;
+    height: 60px;
+  }
+
+  :deep(.quote) {
+    font-size: 0.8rem;
+  }
+}
 </style>
