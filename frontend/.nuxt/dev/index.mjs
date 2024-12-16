@@ -2,9 +2,9 @@ import process from 'node:process';globalThis._importMeta_={url:import.meta.url,
 import { Server } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { threadId, parentPort } from 'node:worker_threads';
-import { getRequestHeader, splitCookiesString, setResponseStatus, setResponseHeader, send, getRequestHeaders, isEvent, createEvent, fetchWithEvent, defineEventHandler, handleCacheHeaders, eventHandler, setHeaders, sendRedirect, proxyRequest, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, setResponseHeaders, createError, getRouterParam, readBody, getQuery as getQuery$1, getResponseStatusText } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/h3/dist/index.mjs';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parentPort, threadId } from 'node:worker_threads';
+import { getRequestHeader, splitCookiesString, setResponseStatus, setResponseHeader, send, getRequestHeaders, defineEventHandler, handleCacheHeaders, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, setResponseHeaders, createError, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/h3/dist/index.mjs';
+import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { stringify, uneval } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/devalue/index.js';
 import destr from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/destr/dist/index.mjs';
 import { withQuery, joinURL, withTrailingSlash, parseURL, withoutBase, getQuery, joinRelativeURL } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/ufo/dist/index.mjs';
@@ -21,7 +21,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { consola } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/consola/dist/index.mjs';
 import { getContext } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/unctx/dist/index.mjs';
 import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/errx/dist/index.js';
-import { isVNode, unref, version } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/vue/index.mjs';
+import { isVNode, version, unref } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/vue/index.mjs';
 import { hash } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/ohash/dist/index.mjs';
 import { createStorage, prefixStorage } from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/unstorage/dist/index.mjs';
 import unstorage_47drivers_47fs from 'file://C:/Code/Muskelmekanikeren/frontend/node_modules/unstorage/drivers/fs.mjs';
@@ -172,7 +172,7 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _k5SId00m47 = (function(nitro) {
+const _yNdGqJRp73 = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
@@ -197,7 +197,7 @@ const devReducers = {
   URL: (data) => data instanceof URL ? data.toString() : void 0
 };
 const asyncContext = getContext("nuxt-dev", { asyncContext: true, AsyncLocalStorage });
-const _c4dEPIY8x9 = (nitroApp) => {
+const _vjnZMktQCh = (nitroApp) => {
   const handler = nitroApp.h3App.handler;
   nitroApp.h3App.handler = (event) => {
     return asyncContext.callAsync({ logs: [], event }, () => handler(event));
@@ -267,15 +267,15 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _k5SId00m47,
-_c4dEPIY8x9
+  _yNdGqJRp73,
+_vjnZMktQCh
 ];
 
-const _lazy_rgNmJg = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_mA3wO7 = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_rgNmJg, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_rgNmJg, lazy: true, middleware: false, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_mA3wO7, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_mA3wO7, lazy: true, middleware: false, method: undefined }
 ];
 
 const serverAssets = [{"baseName":"server","dir":"C:/Code/Muskelmekanikeren/frontend/server/assets"}];

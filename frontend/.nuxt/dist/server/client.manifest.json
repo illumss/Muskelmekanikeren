@@ -7,12 +7,12 @@
     "module": true,
     "resourceType": "script"
   },
-  "C:/Code/Muskelmekanikeren/frontend/node_modules/nuxt/dist/app/entry.js": {
+  "C:/Code/Muskelmekanikeren/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "isEntry": true,
-    "file": "C:/Code/Muskelmekanikeren/frontend/node_modules/nuxt/dist/app/entry.js"
+    "file": "C:/Code/Muskelmekanikeren/node_modules/nuxt/dist/app/entry.js"
   }
 }
