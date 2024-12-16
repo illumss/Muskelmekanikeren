@@ -57,7 +57,6 @@
       </p>
       <p>Hos Dennis Okholm. Blegbanken 7100.</p>
       <br />
-      <p>Du vil modtage en bekræftelse på din email.</p>
       <p>Tak fordi du valgte Muskelmekanikeren.</p>
       <div class="button-container">
         <button class="close-button" @click="redirectToHome">
